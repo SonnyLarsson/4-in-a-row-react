@@ -50,7 +50,7 @@ function Game() {
 
     if (winner) {
         status = winner + ' wins!';
-    } else if (move < 16) {
+    } else if (move < 25) {
         status = 'Next player: ' + (xIsNext ? 'X' : 'O');
     } else {
         status = 'Nobody wins!';
