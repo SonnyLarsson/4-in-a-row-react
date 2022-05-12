@@ -101,6 +101,6 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-## I Started this project with Create React App
+## I Started This Project With Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
