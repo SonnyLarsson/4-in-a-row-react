@@ -62,10 +62,6 @@ In time, I'd like a more colorful and interesting interface, to better appeal to
 
 As of now, gameplay takes place purely per client/browser. Adding the possibility of playing against opponents online would make the game a lot mote interesting.
 
-# I Started this project with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## Available Scripts
 
 In the project directory, you can run:
@@ -104,3 +100,7 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+## I Started this project with Create React App
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
