@@ -18,6 +18,7 @@ This sort of thing might serve as a handy illustration when explaining to my nep
 
 As I was working on it, my wife was disappointed at finding out that the game was strictly a two player affair.
 Thus, I spent a little while making it play against you, introducing a very simple 'AI'.
+I set a challenge for myself to do it entirely on my own, and did it without looking at how it's usually done.
 
 I also implemented a 'chance' of having the AI make a mistake, just because I felt like it.
 
@@ -35,6 +36,15 @@ This should make the game more interesting to play, and probably also make for b
 The game currently depends on a set of predetermined winning lines, borrowing the logic from the tic-tac-toe tutorial.
 I like the simplicity of the solution I've borrowed my logic from, but dynamically generating a list of winning lines would let me manipulate the grid easier.
 
+### More Game Modes
+
+If wins can be calculated dynamically, and the size of the grid can be altered. Why not let the size of a winning row be set by the players?
+I will likely set some sort of limitation, of course, but at least adding the options of three-in-a-row and five-in-a-row would make things more interesting.
+
+### More players
+
+Why stick to traditions? Letting three, or even more (computer-driven or human), players play against each other would really increase complexity and fun.
+
 ### Getting Rid of Time Travel
 
 Currently, I'm not sure I see the point of it, other than as some sort of product demo for React itself.
@@ -46,7 +56,11 @@ As of now, the game plays fine on modern PC-hardware and phones (it'd be disconc
 ### General Design
 
 The very minimalistic design of the current UI isn't my own at all. It comes directly from the tutorial.
-In time, I'd like a more colorful and interesting interface, to better appeal to my intended target audience.
+In time, I'd like a more colorful and interesting interface, to better appeal to my intended target audience. 
+
+### Netplay
+
+As of now, gameplay takes place purely per client/browser. Adding the possibility of playing against opponents online would make the game a lot mote interesting.
 
 # I Started this project with Create React App
 
