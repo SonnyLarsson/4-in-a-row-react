@@ -52,9 +52,21 @@ In time, I'd like a more colorful and interesting interface, to better appeal to
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts [as per react-create-app]
+## Available Scripts
 
 In the project directory, you can run:
+
+### `npm i` or `npm install`
+
+Installs the dependencies specified in the package.json of this project.
+
+### `npm run cleanInstall`
+
+Cleans out the node_modules folder of the project, and reinstalls the dependencies specified in the package.json of this project.
+
+This is sometimes handy when dependencies have been drastically altered, especially when switching branches.
+
+Note: The current iteration of this script is for windows only.
 
 ### `npm start`
 
