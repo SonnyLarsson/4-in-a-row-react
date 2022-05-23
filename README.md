@@ -60,7 +60,7 @@ In time, I'd like a more colorful and interesting interface, to better appeal to
 
 ### Netplay
 
-As of now, gameplay takes place purely per client/browser. Adding the possibility of playing against opponents online would make the game a lot mote interesting.
+As of now, gameplay takes place purely per client/browser. Adding the possibility of playing against opponents online would make the game a lot more interesting.
 
 ## Available Scripts
 
