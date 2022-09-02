@@ -1,8 +1,13 @@
 import { winningLines, shuffleLines } from "./utils";
 
-let shuffledWinningLines;
+type lineScore = {
+    line: (number)[];
+    points: number;
+}
 
-export const getStartPosition = (squares, player) => {  
+let shuffledWinningLines: (number)[][];
+
+export const getStartPosition = (squares: string[], player: string) => {  
     if (squares.includes(player)) {
         return -1;
     }
@@ -17,7 +22,7 @@ export const getStartPosition = (squares, player) => {
     }
 }
 
-export const makeMove = (squares, player) => {
+export const makeMove = (squares: string[], player: string): number => {
     
     let makeMistake = Math.floor(Math.random() * 25) === 0; 
     if (makeMistake) {
@@ -42,63 +47,69 @@ export const makeMove = (squares, player) => {
     return -1;
 }
 
-const getLineOfInterest = (squares, player, index, topPoints) => {
-    const [a, b, c, d] = shuffledWinningLines[index];
+const getLineOfInterest = (squares: (string | null)[], player: string, index: number, topPoints: number): lineScore | null => {
+    const [a, b, c, d]: number[] = shuffledWinningLines[index];
 
     if ((!squares[a] || squares[a] === player) && 
         (!squares[b] || squares[b] === player) &&
         (!squares[c] || squares[c] === player) &&
         (!squares[d] || squares[d] === player)) {
             
-        let points = 0 + !!squares[a] + !!squares[b] + !!squares[c] + !!squares[d];
+        let points = 0 + pointConversion(squares[a]) + pointConversion(squares[b]) +  pointConversion(squares[c]) +  pointConversion(squares[d]);
         
         if (points >= topPoints) {
             topPoints = points;
-            return [[a, b, c, d], topPoints];
+            return { line: [a, b, c, d], points: topPoints};
         }
     }
 
     return null;
 }
 
-const getBestLine = (squares, player) => {
+const pointConversion = (player: string | null): number => {
+     return !!player ? 1: 0;
+} 
+
+const getBestLine = (squares: (string | null)[], player: string): (number)[] => {
     let playerTopPoints = 0;
     let opponentTopPoints = 0;
     
-    let playerLine;
-    let opponentLine;
+    let playerLine: (number)[] = [];
+    let opponentLine: (number)[] = [];
     let startIndex = shuffledWinningLines.length - 1
     let index = 0;
 
     for (index = startIndex; index >= 0; index--) {
         let selectedLine = getLineOfInterest(squares, player, index, playerTopPoints);
 
-        if (selectedLine && selectedLine[0] && selectedLine[1] && selectedLine[1] >= playerTopPoints) {
-            playerLine = selectedLine[0];
-            playerTopPoints = selectedLine[1]
+        if (selectedLine && selectedLine.line && selectedLine.points && selectedLine.points >= playerTopPoints) {
+            playerLine = selectedLine.line;
+            playerTopPoints = selectedLine.points;
         }
     }
 
     for (index = startIndex; index >= 0; index--) {
         let selectedLine = getLineOfInterest(squares, setOpponent(player), index, opponentTopPoints);
 
-        if (selectedLine && selectedLine[0] && selectedLine[1] && selectedLine[1] >= opponentTopPoints) {
-            opponentLine = selectedLine[0];
-            opponentTopPoints = selectedLine[1]
+        if (selectedLine && selectedLine.line && selectedLine.points && selectedLine.points >= opponentTopPoints) {
+            opponentLine = selectedLine.line;
+            opponentTopPoints = selectedLine.points;
         }
     }
 
     return (playerTopPoints < opponentTopPoints) ? opponentLine : playerLine;
 }
 
-const getEmptySquare = (squares) => {
+const getEmptySquare = (squares: (string | null)[]): number => {
     for (var index = squares.length - 1; index >= 0; index--) {
         if(!squares[index]) {
             return index
         }
     }
+
+    return -1
 };
 
-const setOpponent = (player) => {
+const setOpponent = (player: string) => {
     return (player === 'X') ? 'O' : 'X'; 
 }

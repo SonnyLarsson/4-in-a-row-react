@@ -30,7 +30,7 @@ export const winningLines = [
   [9, 13, 17, 21]
 ];
 
-export const calculateWinner = (squares) => {
+export const calculateWinner = (squares: (string | null)[]) => {
     for (let i = 0; i < winningLines.length; i++) {
       const [a, b, c, d] = winningLines[i];
       if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c] && squares[a] === squares[d]) {
@@ -40,7 +40,7 @@ export const calculateWinner = (squares) => {
     return null;
 }
 
-export const shuffleLines = (arrayOfLines) => {
+export const shuffleLines = (arrayOfLines: (number[][])) => {
   let currentIndex = arrayOfLines.length,  randomIndex;
 
   while (currentIndex !== 0) {

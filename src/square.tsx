@@ -1,7 +1,6 @@
-import React from 'react';
 import './index.css';
 
-function Square(props) {
+function Square(props: any) {
     return (
         <button
             className="square"
