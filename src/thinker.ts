@@ -7,7 +7,7 @@ type lineScore = {
 
 let shuffledWinningLines: (number)[][];
 
-export const getStartPosition = (squares: string[], player: string) => {  
+export const getStartPosition = (squares: string[], player: string): number => {  
     if (squares.includes(player)) {
         return -1;
     }
@@ -70,12 +70,12 @@ const pointConversion = (player: string | null): number => {
      return !!player ? 1: 0;
 } 
 
-const getBestLine = (squares: (string | null)[], player: string): (number)[] => {
+const getBestLine = (squares: (string | null)[], player: string): number[] => {
     let playerTopPoints = 0;
     let opponentTopPoints = 0;
     
-    let playerLine: (number)[] = [];
-    let opponentLine: (number)[] = [];
+    let playerLine: number[] = [];
+    let opponentLine: number[] = [];
     let startIndex = shuffledWinningLines.length - 1
     let index = 0;
 
@@ -110,6 +110,6 @@ const getEmptySquare = (squares: (string | null)[]): number => {
     return -1
 };
 
-const setOpponent = (player: string) => {
+const setOpponent = (player: string): string => {
     return (player === 'X') ? 'O' : 'X'; 
 }

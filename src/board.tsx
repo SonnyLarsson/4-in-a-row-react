@@ -1,6 +1,6 @@
 import Square from './square';
 
-function Board(props: any) {
+function Board(props: any): JSX.Element {
 
   let renderSquare = (i: number) => {
     return (

@@ -1,6 +1,7 @@
+import { ReactElement } from 'react';
 import './index.css';
 
-function Square(props: any) {
+function Square(props: any): ReactElement {
     return (
         <button
             className="square"
