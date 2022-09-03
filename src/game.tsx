@@ -22,8 +22,6 @@ function Game(): any {
     if(!move) { move = 0 };
 
     let handleClick = (i: number) => {        
-        console.log()
-
         if (calculateWinner(squares) || squares[i]) {
             return;
         }
@@ -31,7 +29,6 @@ function Game(): any {
         squares[i] = xIsNext ? 'X' : 'O';
         setSquares([...squares]);        
         history.push(squares);
-
         xIsNext = !xIsNext;
         move = move + 1;
     }
@@ -40,7 +37,7 @@ function Game(): any {
         move = goTo;
         xIsNext = (goTo % 2) === 0;
 
-        setSquares(history[goTo])        
+        setSquares([...history[goTo]])        
         timeTravel(goTo);
     }    
 
