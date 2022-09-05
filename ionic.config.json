@@ -1,0 +1,7 @@
+{
+    "name": "four_in_a_row_react",
+    "integrations": {
+      "capacitor": {}
+    },
+    "type": "react"
+  }
