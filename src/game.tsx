@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import './index.css';
 import { calculateWinner } from './utils';
-import { getStartPosition, makeMove } from './thinker';
+import { getStartPosition, makeMove, setResult } from './thinker';
 import Board from './board';
 
 let history: (string | null)[][];
@@ -11,7 +11,7 @@ let xIsNext: boolean;
 function Game(): any {
     const [squares, setSquares] = useState(Array(25).fill(null));
 
-    let winner = calculateWinner(squares);
+    let winner: string | null = calculateWinner(squares);
     let status: string;
 
     if(!history) {
@@ -22,7 +22,7 @@ function Game(): any {
     if(!move) { move = 0 };
 
     let handleClick = (i: number) => {        
-        if (calculateWinner(squares) || squares[i]) {
+        if (winner || squares[i]) {
             return;
         }
         
@@ -47,10 +47,12 @@ function Game(): any {
 
     if (winner) {
         status = winner + ' wins!';
+        setResult(true, 'X', winner);
     } else if (move < 25) {
         status = 'Next player: ' + (xIsNext ? 'X' : 'O');
     } else {
         status = 'Nobody wins!';
+        setResult(false);
     }
 
     let turn = (xIsNext) ? 'X' : 'O'; 

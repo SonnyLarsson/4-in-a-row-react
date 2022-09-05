@@ -5,37 +5,119 @@ type lineScore = {
     points: number;
 }
 
+let focusedOpponent:boolean = false;
 let shuffledWinningLines: (number)[][];
+let mood: number = 0; 
 
-export const getStartPosition = (squares: string[], player: string): number => {  
+export const setResult = (win: boolean, player: string = '', winner: string = '') => {
+    if (win && winner === player) mood--;
+    if (win && winner != player) mood++;
+    
+    tryToFocus();
+}
+
+const tryToFocus = () => {
+
+    if (mood > 5) {
+        focusedOpponent = false;
+    } else if (mood < -3) {
+        focusedOpponent = true
+    } else {
+        focusedOpponent = Boolean(Math.floor(Math.random() * 2))
+    }; 
+}
+
+export const getStartPosition = (squares: string[], player: string): number => {
+
     if (squares.includes(player)) {
         return -1;
     }
-    else {
-        let position = Math.floor(Math.random() * 25);
-        
-        while (squares[position]) {
-            position = Math.floor(Math.random() * 25);
+
+    if (focusedOpponent) {
+        return getCenterPosition(squares);
+    }
+
+    return getRandomPosition(squares);
+}
+
+const getRandomPosition = (squares: string[]): number => {
+    let position = Math.floor(Math.random() * squares.length);
+    let safetyNet = 50;
+
+    while (squares[position] && safetyNet > 0) {
+        position = Math.floor(Math.random() * squares.length);
+        safetyNet--;
+    }
+
+    if (safetyNet < 1) {
+        for (let index = squares.length; index > 0; --index) {
+            if (!squares[index]) {
+                return index;
+            }
         }
 
-        return position;
+        return -1;
     }
+
+    return position;
+}
+
+const getCenterPosition = (squares: string[]): number => {
+    let split: number = Math.floor(squares.length/2);
+    if (!squares[split]) return split;
+    
+    let squareRoot: number = Math.sqrt(squares.length);
+    let top: number;
+    let bottom: number;
+    let centerArray: number[] = [];   
+
+    if (squares.length % 2 === 0) {
+        top = split - (squareRoot/2);
+        bottom = top + squareRoot;
+        centerArray = [top, top+1, bottom, bottom+1];
+    }
+
+    if (squares.length % 2 !== 0) {
+        top = split - squareRoot;
+        bottom = split + squareRoot;
+        centerArray = [top-1, top, top+1, split-1, split+1, bottom-1, bottom, bottom+1];
+    }
+
+    if (centerArray.length === 0) return -1;
+
+    let position = centerArray[Math.floor(Math.random() * centerArray.length)];
+    let safetyNet = 50;
+
+    while (squares[position] && safetyNet > 0) {
+        position = centerArray[Math.floor(Math.random() * centerArray.length)]
+        safetyNet--;
+    }
+
+    if (safetyNet < 1) {
+        for (let index = centerArray.length; index > 0; --index) {
+            if (!squares[centerArray[index]]) {
+                return centerArray[index];
+            }
+        }
+
+        return -1;
+    }
+
+    return position;
 }
 
 export const makeMove = (squares: string[], player: string): number => {
-    
-    let makeMistake = Math.floor(Math.random() * 25) === 0; 
-    if (makeMistake) {
-        getEmptySquare(squares);
+
+    if (!focusedOpponent) {
+        let makeMistake = Math.floor(Math.random() * 25) === 0;
+        if (makeMistake) {
+            return getEmptySquare(squares);
+        }
     }
        
     shuffledWinningLines = shuffleLines(winningLines.slice());
 
     let line = getBestLine(squares, player);
-
-    if (!line) {
-        return getEmptySquare(squares);
-    }
 
     for (let index = 0; index < line.length; index++) {
         let position = line[index];
@@ -44,7 +126,7 @@ export const makeMove = (squares: string[], player: string): number => {
         }
     }
 
-    return -1;
+    return getEmptySquare(squares);
 }
 
 const getLineOfInterest = (squares: (string | null)[], player: string, index: number, topPoints: number): lineScore | null => {
@@ -101,9 +183,19 @@ const getBestLine = (squares: (string | null)[], player: string): number[] => {
 }
 
 const getEmptySquare = (squares: (string | null)[]): number => {
-    for (var index = squares.length - 1; index >= 0; index--) {
-        if(!squares[index]) {
-            return index
+    let goForwards = Boolean(Math.floor(Math.random() * 2));
+
+    if (goForwards) {
+        for (var index = 0; index < squares.length; index++) {
+            if(!squares[index]) {
+                return index
+            }
+        }
+    } else {
+        for (var index = squares.length - 1; index >= 0; index--) {
+            if(!squares[index]) {
+                return index
+            }
         }
     }
 
