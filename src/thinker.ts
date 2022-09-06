@@ -1,4 +1,4 @@
-import { winningLines, shuffleLines } from "./utils";
+import { defineBoard, getWinningLines, shuffleLines } from "./utils";
 
 type lineScore = {
     line: (number)[];
@@ -28,6 +28,7 @@ const tryToFocus = () => {
 }
 
 export const getStartPosition = (squares: string[], player: string): number => {
+    defineBoard(Math.sqrt(squares.length), 4);
 
     if (squares.includes(player)) {
         return -1;
@@ -115,7 +116,7 @@ export const makeMove = (squares: string[], player: string): number => {
         }
     }
        
-    shuffledWinningLines = shuffleLines(winningLines.slice());
+    shuffledWinningLines = shuffleLines(getWinningLines());
 
     let line = getBestLine(squares, player);
 

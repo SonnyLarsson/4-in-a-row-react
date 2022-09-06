@@ -26,6 +26,8 @@ I also implemented a 'chance' of having the AI make a mistake, just because I fe
 
 As of September 5th, 2022, this project now has Android support, via ionic capacitor.
 
+Which is to say that it's now possible to turn this application into an .apk, with a couple of quick commands.
+
 ## Planned Changes
 
 When I have the time and inclination to work on this again, I have some ideas on how to make it better.
