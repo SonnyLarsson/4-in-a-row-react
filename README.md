@@ -39,8 +39,12 @@ This should make the game more interesting to play, and probably also make for b
 
 ### Generating Winning Lines Differently
 
-The game currently depends on a set of predetermined winning lines, borrowing the logic from the tic-tac-toe tutorial.
-I like the simplicity of the solution I've borrowed my logic from, but dynamically generating a list of winning lines would let me manipulate the grid easier.
+~~The game currently depends on a set of predetermined winning lines, borrowing the logic from the tic-tac-toe tutorial.
+I like the simplicity of the solution I've borrowed my logic from, but dynamically generating a list of winning lines would let me manipulate the grid easier.~~
+
+The game now calculates winning lines rather than relying on a hardcoded list. The functionality seems solid, but could do with some optimization, possibly.
+
+Needs more testing, though.
 
 ### More Game Modes
 
