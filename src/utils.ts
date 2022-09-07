@@ -37,11 +37,11 @@ let winningLineLength: number;
 export const defineBoard = (side: number, lineLength: number): void => {
   boardSide = side;
   winningLineLength = lineLength;
-  winningLines = generateWinningLines();
+  generateWinningLines();
 }
 
 export const getWinningLines = (): number[][] => {
-  if (!winningLines) winningLines = generateWinningLines();
+  if (!winningLines) generateWinningLines();
   return winningLines;
 } 
 
@@ -60,19 +60,44 @@ export const calculateWinner = (squares: (string | null)[]): string | null => {
     return null;
 }
 
-export const generateWinningLines = (): number[][] => {
+export const generateWinningLines = (): void => {
 
-  let linesInSide: number = boardSide - winningLineLength + 1;
-  let squareSize: number = boardSide*boardSide;
+  let linesInSide: number = boardSide - winningLineLength + 1; 
+  
+  winningLines = [];
+
+  generateDiagonalForwardsWinningLines(linesInSide);
+  generateDiagonalBackwardsWinningLines(linesInSide);
+  generateStraightWinningLines(linesInSide);
+
+  // improvizedNumericSort(winningLines);
+  // console.log(winningLines);
+}
+
+const generateStraightWinningLines = (linesInSide: number): void => {
   let linesArray: number[] = [];
 
-  for (let i = 0; i < squareSize; i++) {
+  for (let i = 0; i < boardSide*boardSide; i++) {
     linesArray.push(i);
   }
- 
-  let sideToCalc: number[];
-  let winningLines: number[][] = [];
+  
+  for (let x = 0; x < boardSide; x++) {
+    let pick = x;
+    for (let y = 0; y < boardSide; y++) {
+      linesArray.push(pick);
+      pick+=boardSide;
+    }
+  }
 
+  for (let y = 0; y < linesArray.length/boardSide; y++) {
+    let sideToCalc: number[] = linesArray.slice(y*boardSide, boardSide+(y*boardSide));
+    for (let x = 0; x < linesInSide; x++) {
+      winningLines.push(sideToCalc.slice(x, winningLineLength+x));
+    }
+  }
+}
+
+const generateDiagonalForwardsWinningLines = (linesInSide: number): void => {
   let startPosition = winningLineLength-1;
   let count = linesInSide*linesInSide;
 
@@ -94,17 +119,19 @@ export const generateWinningLines = (): number[][] => {
     winningLines.push(winningLine);
     count--;
   }
+}
 
-  startPosition = boardSide - winningLineLength;
-  count = linesInSide*linesInSide;
+const generateDiagonalBackwardsWinningLines = (linesInSide: number): void => {
+  let startPosition: number = boardSide - winningLineLength;
+  let count:number = linesInSide*linesInSide;
 
   while (count > 0) {
     let winningLine: number[] = [];
     let pick = startPosition;
 
     for (let i = startPosition; i < winningLineLength + startPosition; i++) {
-       winningLine.push(linesArray[pick]);
-       pick+=boardSide+1;
+      winningLine.push(pick);
+      pick+=boardSide+1;
     }
 
     if (winningLine[0] == 0) {
@@ -116,23 +143,6 @@ export const generateWinningLines = (): number[][] => {
     winningLines.push(winningLine);
     count--;
   }
-
-  for (let x = 0; x < boardSide; x++) {
-    let pick = x;
-    for (let y = 0; y < boardSide; y++) {
-      linesArray.push(pick);
-      pick+=boardSide;
-    }
-  }
-
-  for (let y = 0; y < linesArray.length/boardSide; y++) {
-    sideToCalc = linesArray.slice(y*boardSide, boardSide+(y*boardSide));
-    for (let x = 0; x < linesInSide; x++) {
-      winningLines.push(sideToCalc.slice(x, winningLineLength+x));
-    }
-  }  
-  
-  return winningLines;
 }
 
 export const shuffleLines = (arrayOfLines: (number[][])) => {
