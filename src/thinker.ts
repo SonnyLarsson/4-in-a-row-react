@@ -132,6 +132,7 @@ export const makeMove = (squares: string[], player: string): number => {
 
 const getLineOfInterest = (squares: (string | null)[], player: string, index: number, topPoints: number): lineScore | null => {
     const [a, b, c, d]: number[] = shuffledWinningLines[index];
+    const lineLength = shuffledWinningLines[index].length;
 
     if ((!squares[a] || squares[a] === player) && 
         (!squares[b] || squares[b] === player) &&
@@ -139,7 +140,8 @@ const getLineOfInterest = (squares: (string | null)[], player: string, index: nu
         (!squares[d] || squares[d] === player)) {
             
         let points = 0 + pointConversion(squares[a]) + pointConversion(squares[b]) +  pointConversion(squares[c]) +  pointConversion(squares[d]);
-        
+        if (points === lineLength-1) points += 1;
+
         if (points >= topPoints) {
             topPoints = points;
             return { line: [a, b, c, d], points: topPoints};
