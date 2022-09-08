@@ -26,6 +26,8 @@ I also implemented a 'chance' of having the AI make a mistake, just because I fe
 
 As of September 5th, 2022, this project now has Android support, via ionic capacitor.
 
+Which is to say that it's now possible to turn this application into an .apk, with a couple of quick commands.
+
 ## Planned Changes
 
 When I have the time and inclination to work on this again, I have some ideas on how to make it better.
@@ -37,8 +39,12 @@ This should make the game more interesting to play, and probably also make for b
 
 ### Generating Winning Lines Differently
 
-The game currently depends on a set of predetermined winning lines, borrowing the logic from the tic-tac-toe tutorial.
-I like the simplicity of the solution I've borrowed my logic from, but dynamically generating a list of winning lines would let me manipulate the grid easier.
+~~The game currently depends on a set of predetermined winning lines, borrowing the logic from the tic-tac-toe tutorial.
+I like the simplicity of the solution I've borrowed my logic from, but dynamically generating a list of winning lines would let me manipulate the grid easier.~~
+
+The game now calculates winning lines rather than relying on a hardcoded list. The functionality seems solid, but could do with some optimization, possibly.
+
+Needs more testing, though.
 
 ### More Game Modes
 
