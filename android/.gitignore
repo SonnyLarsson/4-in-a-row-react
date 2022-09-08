@@ -1,50 +1,4 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-
-# testing
-/coverage
-
-# production
-/build
-
-# misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-
-# testing
-/coverage
-
-# production
-/build
-
-# misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# Using Android gitignore template: https://github.com/github/gitignore/blob/HEAD/Android.gitignore
 
 # Built application files
 *.apk
@@ -132,33 +86,16 @@ lint/outputs/
 lint/tmp/
 # lint/reports/
 
-#ionic capacitor
-.idea/
-dist/
-types/
-.sourcemaps
-xcuserdata/
-node_modules/
-Pods/
-*.map
-.DS_Store
-Podfile.lock
-Build/*
-build/
-Index/
-.*.sw*
-android-template.iml
-!/build/.npmkeep
-lerna-debug.log
-local.properties
-contents.xcworkspacedata
-android-template/.gradle/
-android-template/app/app.iml
-.gradle/
-.settings/
-.project
-.env
+# Android Profiling
+*.hprof
 
-# Carthage and Carthage-built binaries
-Carthage
-*.xcframework.zip
+# Cordova plugins for Capacitor
+capacitor-cordova-android-plugins
+
+# Copied web assets
+app/src/main/assets/public
+
+# Generated Config files
+app/src/main/assets/capacitor.config.json
+app/src/main/assets/capacitor.plugins.json
+app/src/main/res/xml/config.xml

@@ -1,10 +1,8 @@
-import './index.css';
-import Square from './square.js';
-import React from 'react';
+import Square from './square';
 
-function Board(props) {
+function Board(props: any): JSX.Element {
 
-  let renderSquare = (i) => {
+  let renderSquare = (i: number) => {
     return (
       <Square
         value={props.squares[i]}

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">four_in_a_row_react</string>
+    <string name="title_activity_main">four_in_a_row_react</string>
+    <string name="package_name">io.ionic.four_in_a_row_react</string>
+    <string name="custom_url_scheme">io.ionic.four_in_a_row_react</string>
+</resources>

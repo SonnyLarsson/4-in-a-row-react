@@ -1,0 +1,8 @@
+{
+    "appId": "io.ionic.four_in_a_row_react",
+    "appName": "four_in_a_row_react",
+    "bundledWebRuntime": false,
+    "npmClient": "npm",
+    "webDir": "build",
+    "cordova": {}
+  }

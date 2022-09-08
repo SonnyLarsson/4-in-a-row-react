@@ -22,6 +22,12 @@ I set a challenge for myself to do it entirely on my own, and did it without loo
 
 I also implemented a 'chance' of having the AI make a mistake, just because I felt like it.
 
+## Android Support
+
+As of September 5th, 2022, this project now has Android support, via ionic capacitor.
+
+Which is to say that it's now possible to turn this application into an .apk, with a couple of quick commands.
+
 ## Planned Changes
 
 When I have the time and inclination to work on this again, I have some ideas on how to make it better.
@@ -33,8 +39,12 @@ This should make the game more interesting to play, and probably also make for b
 
 ### Generating Winning Lines Differently
 
-The game currently depends on a set of predetermined winning lines, borrowing the logic from the tic-tac-toe tutorial.
-I like the simplicity of the solution I've borrowed my logic from, but dynamically generating a list of winning lines would let me manipulate the grid easier.
+~~The game currently depends on a set of predetermined winning lines, borrowing the logic from the tic-tac-toe tutorial.
+I like the simplicity of the solution I've borrowed my logic from, but dynamically generating a list of winning lines would let me manipulate the grid easier.~~
+
+The game now calculates winning lines rather than relying on a hardcoded list. The functionality seems solid, but could do with some optimization, possibly.
+
+Needs more testing, though.
 
 ### More Game Modes
 
@@ -100,6 +110,28 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run ionicCli-runonce`
+
+Installs the ionic cli globally if you want it.
+
+For Android (and iOS) development.
+
+Only needed to be run once, or if you've previously removed the ionic cli from your environment.
+
+### `npm run ionicAndroid-runonce`
+
+Sets the project up for Android development.
+
+Only needs to be run if Android files are missing.
+
+If you run into trouble getting the project to run in Android Studio, try removing the android folder in this project and running this command again.
+
+EXPERIMENTAL: I haven't tested this much past the initial run.
+
+### `npm run android-studio`
+
+Opens the project in Android Studio.
 
 ## I Started This Project With Create React App
 

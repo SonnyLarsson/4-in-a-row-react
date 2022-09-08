@@ -1,18 +1,18 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import './index.css';
-import Board from './board.js';
 import { calculateWinner } from './utils';
-import { getStartPosition, makeMove } from './thinker';
+import { getStartPosition, makeMove, setResult } from './thinker';
+import Board from './board';
 
-let history;
-let move;
-let xIsNext;
+let history: (string | null)[][];
+let move: number;
+let xIsNext: boolean;
 
-function Game() {
-    let [squares, setSquares] = useState(Array(25).fill(null));
+function Game(): any {
+    const [squares, setSquares] = useState(Array(25).fill(null));
 
-    let winner = calculateWinner(squares);
-    let status;
+    let winner: string | null = calculateWinner(squares);
+    let status: string;
 
     if(!history) {
         history = [Array(25).fill(null)]
@@ -21,39 +21,38 @@ function Game() {
 
     if(!move) { move = 0 };
 
-    let handleClick = (i) => {
-        squares = squares.slice(); //this is dumb, but needed to make react know it needs to update.
-        
-        if (calculateWinner(squares) || squares[i]) {
+    let handleClick = (i: number) => {        
+        if (winner || squares[i]) {
             return;
         }
         
         squares[i] = xIsNext ? 'X' : 'O';
-        setSquares(squares);        
+        setSquares([...squares]);        
         history.push(squares);
-
         xIsNext = !xIsNext;
         move = move + 1;
     }
 
-    let jumpTo = (goTo) => {
+    let jumpTo = (goTo: number) => {
         move = goTo;
         xIsNext = (goTo % 2) === 0;
 
-        setSquares(history[goTo])        
+        setSquares([...history[goTo]])        
         timeTravel(goTo);
     }    
 
-    let timeTravel = (goTo) => {
+    let timeTravel = (goTo: number) => {
         history = history.slice(0, goTo + 1);
     }
 
     if (winner) {
         status = winner + ' wins!';
+        setResult(true, 'X', winner);
     } else if (move < 25) {
         status = 'Next player: ' + (xIsNext ? 'X' : 'O');
     } else {
         status = 'Nobody wins!';
+        setResult(false);
     }
 
     let turn = (xIsNext) ? 'X' : 'O'; 
@@ -67,14 +66,14 @@ function Game() {
         }
     }
 
-    const moves = history.map((move, goTo) => {
+    const moves = history.map((move, goTo): any => {
         const desc = goTo?
           'Go to move #' + goTo :
           'Go to game start';
         return (
-          <li key={goTo}>
-            <button onClick={() => jumpTo(goTo)}>{desc}</button>
-          </li>
+           <li key={goTo}>
+             <button onClick={() => jumpTo(goTo)}>{desc}</button>
+           </li>
         );
       });
 
@@ -84,14 +83,13 @@ function Game() {
             <div className="game-board">
                 <Board
                     squares={squares}
-                    onClick={(i) => handleClick(i)}
+                    onClick={(i: number) => handleClick(i)}
                 />
             </div>
             <div className="game-info">            
             <ol>{moves}</ol>
         </div>
-    </div>
-    );
+    </div>);
 }
 
 export default Game;
